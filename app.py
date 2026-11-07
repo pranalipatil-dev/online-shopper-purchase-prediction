@@ -193,6 +193,7 @@ def display_metrics(metrics):
 
 
 def plot_confusion_matrix(y_test, y_pred):
+
     # Calculate the confusion matrix
     cm = confusion_matrix(
         y_test, y_pred, labels=[0, 1]
@@ -211,12 +212,40 @@ def plot_confusion_matrix(y_test, y_pred):
         ax=ax
     )
 
+    # Add labels and title
     ax.set_xlabel("Predicted Class")
     ax.set_ylabel("Actual Class")
     ax.set_title("Confusion Matrix")
 
-    st.pyplot(fig)
+    # Adjust the plot layout
+    fig.tight_layout()
+
+    # Display the plot
+    st.pyplot(fig, clear_figure=False)
+
+    # Close the figure
     plt.close(fig)
+
+
+
+def display_classification_report(y_test, y_pred):
+    # Generate the classification report
+    report = classification_report(
+        y_test,
+        y_pred,
+        labels=[0, 1],
+        target_names=["No Purchase", "Purchase"],
+        output_dict=True,
+        zero_division=0
+    )
+
+    # Convert the report into a table
+    report_df = pd.DataFrame(report).transpose()
+
+    st.dataframe(
+        report_df.round(4),
+        use_container_width=True
+    )
 
 
 def display_classification_report(y_test, y_pred):
