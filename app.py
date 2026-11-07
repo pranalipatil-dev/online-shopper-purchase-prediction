@@ -194,12 +194,21 @@ def display_metrics(metrics):
 
 
 
+
+
+
 def plot_confusion_matrix(y_test, y_pred):
 
     # Calculate the confusion matrix
     cm = confusion_matrix(
         y_test, y_pred, labels=[0, 1]
     )
+
+    # Labels for confusion matrix cells
+    cell_labels = [
+        ["TN", "FP"],
+        ["FN", "TP"]
+    ]
 
     # Create a customized heatmap
     fig = go.Figure(
@@ -221,13 +230,16 @@ def plot_confusion_matrix(y_test, y_pred):
         )
     )
 
-    # Display values inside each cell
+    # Display TN, FP, FN and TP with their counts
     for i in range(2):
         for j in range(2):
             fig.add_annotation(
                 x=j,
                 y=i,
-                text=str(cm[i, j]),
+                text=(
+                    f"<b>{cell_labels[i][j]}</b>"
+                    f"<br>{cm[i, j]}"
+                ),
                 showarrow=False,
                 font=dict(
                     size=18,
@@ -235,45 +247,28 @@ def plot_confusion_matrix(y_test, y_pred):
                 )
             )
 
-    # Customize the layout
+    # Customize the plot layout
     fig.update_layout(
         title="Confusion Matrix",
         xaxis_title="Predicted Class",
         yaxis_title="Actual Class",
         yaxis=dict(autorange="reversed"),
         height=400,
-        margin=dict(l=20, r=20, t=50, b=30),
+        margin=dict(
+            l=20, r=20, t=50, b=30
+        ),
         paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
         font=dict(color="#FFFFFF")
     )
 
-    # Display interactive heatmap
+    # Display the interactive heatmap
     st.plotly_chart(
         fig,
         use_container_width=True
     )
 
 
-
-
-def display_classification_report(y_test, y_pred):
-    # Generate the classification report
-    report = classification_report(
-        y_test,
-        y_pred,
-        labels=[0, 1],
-        target_names=["No Purchase", "Purchase"],
-        output_dict=True,
-        zero_division=0
-    )
-
-    # Convert the report into a table
-    report_df = pd.DataFrame(report).transpose()
-
-    st.dataframe(
-        report_df.round(4),
-        use_container_width=True
-    )
 
 
 def display_classification_report(y_test, y_pred):
