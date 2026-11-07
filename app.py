@@ -6,6 +6,7 @@ import joblib
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go
 
 from sklearn.metrics import (
     accuracy_score,
@@ -192,6 +193,7 @@ def display_metrics(metrics):
         cols[i].metric(name, f"{metrics[name]:.4f}")
 
 
+
 def plot_confusion_matrix(y_test, y_pred):
 
     # Calculate the confusion matrix
@@ -199,32 +201,58 @@ def plot_confusion_matrix(y_test, y_pred):
         y_test, y_pred, labels=[0, 1]
     )
 
-    # Create the heatmap
-    fig, ax = plt.subplots(figsize=(6, 4))
-
-    sns.heatmap(
-        cm,
-        annot=True,
-        fmt="d",
-        cmap="BuGn",
-        xticklabels=["No Purchase", "Purchase"],
-        yticklabels=["No Purchase", "Purchase"],
-        ax=ax
+    # Create a customized heatmap
+    fig = go.Figure(
+        data=go.Heatmap(
+            z=cm,
+            x=["No Purchase", "Purchase"],
+            y=["No Purchase", "Purchase"],
+            colorscale=[
+                [0, "#E4F5F0"],
+                [0.5, "#5AC8AE"],
+                [1, "#126B59"]
+            ],
+            showscale=True,
+            hovertemplate=(
+                "Actual: %{y}<br>"
+                "Predicted: %{x}<br>"
+                "Count: %{z}<extra></extra>"
+            )
+        )
     )
 
-    # Add labels and title
-    ax.set_xlabel("Predicted Class")
-    ax.set_ylabel("Actual Class")
-    ax.set_title("Confusion Matrix")
+    # Display values inside each cell
+    for i in range(2):
+        for j in range(2):
+            fig.add_annotation(
+                x=j,
+                y=i,
+                text=str(cm[i, j]),
+                showarrow=False,
+                font=dict(
+                    size=18,
+                    color="black"
+                )
+            )
 
-    # Adjust the plot layout
-    fig.tight_layout()
+    # Customize the layout
+    fig.update_layout(
+        title="Confusion Matrix",
+        xaxis_title="Predicted Class",
+        yaxis_title="Actual Class",
+        yaxis=dict(autorange="reversed"),
+        height=400,
+        margin=dict(l=20, r=20, t=50, b=30),
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#FFFFFF")
+    )
 
-    # Display the plot
-    st.pyplot(fig, clear_figure=False)
+    # Display interactive heatmap
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
 
-    # Close the figure
-    plt.close(fig)
 
 
 
