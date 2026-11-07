@@ -86,47 +86,14 @@ The results obtained on the test dataset are:
 
 ## 7. Observations
 
-### Logistic Regression
-
-Logistic Regression gave an accuracy of 88.69% and the highest AUC of 0.8996 among all five models.
-
-Its precision was also the highest at 0.7524. However, recall was only 0.4136, which means it was not able to identify many of the actual purchase cases.
-
-Overall, the model performed well but could be improved in terms of recall.
-
-### Decision Tree
-
-Decision Tree achieved an accuracy of 85.66% and an F1 Score of 0.5524.
-
-Its precision and recall were quite close to each other, indicating a relatively balanced performance for both measures.
-
-However, its AUC was 0.7380, which was the lowest among the five models.
-
-### K-Nearest Neighbors (KNN)
-
-KNN achieved an accuracy of 87.34%.
-
-Its precision was 0.6622, but recall was comparatively low at 0.3901. This means it missed many actual purchase cases.
-
-Its F1 Score was 0.4909, which was lower than Logistic Regression, Decision Tree, and SVM.
-
-### Gaussian Naive Bayes
-
-Naive Bayes gave very different results compared to the other models.
-
-It achieved the highest recall of 0.9791, which means it identified almost all actual purchase cases.
-
-However, its precision was only 0.1756, indicating that many non-purchase cases were incorrectly predicted as purchases.
-
-Because of this, its overall accuracy and F1 Score were quite low.
-
-### Support Vector Machine (SVM)
-
-SVM achieved the highest accuracy of 89.55% among the five models.
-
-It also gave the highest F1 Score of 0.6083 and MCC of 0.5614.
-
-Its precision was 0.7361 and recall was 0.5183. Although recall was not the highest, the model gave the best overall performance based on the selected evaluation criteria.
+| ML Model Name | Observation about model performance |
+|---|---|
+| Logistic Regression | Logistic Regression achieved an accuracy of 88.69% and the highest AUC (0.8996) and precision (0.7524). However, recall was only 0.4136, so it missed many actual purchase cases. |
+| Decision Tree | Decision Tree achieved 85.66% accuracy and an F1 Score of 0.5524. Its precision (0.5400) and recall (0.5654) were relatively balanced, but its AUC (0.7380) was the lowest among all models. |
+| KNN | KNN achieved 87.34% accuracy and precision of 0.6622. However, its recall (0.3901) was low, indicating that it missed many actual purchases. Its F1 Score was 0.4909. |
+| Naive Bayes | Naive Bayes achieved the highest recall (0.9791), identifying almost all actual purchases. However, its precision was only 0.1756, meaning many non-purchase cases were incorrectly predicted as purchases. Its accuracy and F1 Score were low. |
+| Support Vector Machine | SVM achieved the highest accuracy (89.55%), F1 Score (0.6083), and MCC (0.5614). Its precision was 0.7361 and recall was 0.5183, giving the best overall performance. |
+| **Overall Winner for the Dataset** | **Support Vector Machine (SVM)** was selected as the best model because it achieved the highest accuracy, F1 Score, and MCC. |
 
 ## 8. Best Performing Model
 
