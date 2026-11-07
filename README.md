@@ -6,6 +6,10 @@ In this project, I have used different machine learning classification algorithm
 
 I have trained and compared five classification models using the same dataset. I have also developed a Streamlit application where the user can upload test data, select a model, and check its performance.
 
+**GitHub Repository:** https://github.com/pranalipatil-dev/online-shopper-purchase-prediction
+
+**Streamlit Application:** https://online-shopper-purchase-prediction-2026aj05795.streamlit.app/
+
 ## 2. Dataset Information
 
 **Dataset Name:** Online Shoppers Purchasing Intention Dataset  
@@ -23,6 +27,8 @@ The dataset contains information such as the number of pages visited, time spent
 
 This is a binary classification problem.
 
+The dataset is loaded directly from the UCI Machine Learning Repository using its URL in the Jupyter Notebook. Therefore, the original dataset CSV does not need to be downloaded manually.
+
 ## 3. Data Preprocessing
 
 Before training the models, I performed the following preprocessing steps:
@@ -34,6 +40,8 @@ Before training the models, I performed the following preprocessing steps:
 5. Applied StandardScaler to numerical features.
 6. Applied OneHotEncoder to categorical features.
 7. Used ColumnTransformer and Pipeline to apply preprocessing consistently.
+
+After removing 125 duplicate records, 12,205 records remained. These were split into 9,764 training records and 2,441 testing records.
 
 I fitted the preprocessing steps only on the training data to avoid data leakage.
 
@@ -136,6 +144,8 @@ Logistic Regression performed better in terms of AUC and precision, but SVM prov
 
 I created a Streamlit application to test and compare the trained models.
 
+**Live Application:** https://online-shopper-purchase-prediction-2026aj05795.streamlit.app/
+
 The application provides the following features:
 
 1. Upload a CSV file containing test data.
@@ -154,15 +164,29 @@ The trained models are saved using Joblib. The Streamlit application loads these
 
 | File | Description |
 |---|---|
-| `2026AJ05795.ipynb` | Jupyter Notebook containing preprocessing, model training, and evaluation |
+| `2026AJ05795.ipynb` | Jupyter Notebook containing dataset loading, preprocessing, model training, and evaluation |
 | `app.py` | Streamlit application code |
 | `requirements.txt` | Required Python libraries |
-| `online_shoppers_intention.csv` | Original dataset |
+| `README.md` | Project details, results, and instructions |
 | `test_data.csv` | Test dataset used for evaluation |
 | `model_comparison.csv` | Comparison of all five models |
 | `model/` | Folder containing the five saved model pipelines |
 
-## 11. How to Run the Application
+The original dataset is loaded from the UCI repository URL in the notebook, so a separate copy of the dataset is not required in the repository.
+
+## 11. How to Run the Project
+
+### Run the Jupyter Notebook
+
+1. Open `2026AJ05795.ipynb` in Jupyter Notebook.
+2. Install the required libraries if they are not already available.
+3. Run the notebook cells in order.
+4. The notebook loads the dataset from UCI, performs preprocessing, trains the five models, and displays the evaluation results.
+5. The trained models and test data are saved for use in the Streamlit application.
+
+An internet connection is required when loading the original dataset from UCI.
+
+### Run the Streamlit Application
 
 **Step 1:** Install the required libraries.
 
@@ -179,6 +203,8 @@ streamlit run app.py
 **Step 3:** Open the Streamlit application in the browser.
 
 **Step 4:** Upload `test_data.csv` and select the model to view its performance.
+
+The application uses the already trained and saved models, so there is no need to train them again.
 
 ## 12. Conclusion
 
